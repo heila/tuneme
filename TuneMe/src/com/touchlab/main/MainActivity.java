@@ -3,6 +3,7 @@ package com.touchlab.main;
 import java.io.File;
 import java.io.IOException;
 
+import com.touchlab.musicserver.DnssdDiscovery;
 import com.touchlab.musicserver.MusicServer;
 import com.touchlab.musicserver.R;
 import com.touchlab.musicserver.R.layout;
@@ -20,9 +21,7 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		new Task().execute("Hallo");
-
-		
+		new Task().execute("Hallo");	
 		
 
 	}
@@ -35,6 +34,9 @@ public class MainActivity extends Activity {
 			try {
 				File baseDirectory = Environment.getExternalStorageDirectory();
 				new MusicServer(baseDirectory);
+				DnssdDiscovery sd = DnssdDiscovery.getInstance();
+				sd.setUp(MainActivity.this);
+				sd.publishUrl("Rob", "Music description goes here", "http://blah.blah/song");
 				
 			} catch (IOException ioe) {
 				System.err.println("Couldn't start server:\n" + ioe);

@@ -1,10 +1,12 @@
 package com.touchlab.musicserver;
 
+import java.io.File;
 import java.io.IOException;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
+import android.os.Environment;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -26,7 +28,9 @@ public class MainActivity extends Activity {
 		protected Integer doInBackground(String... params) {
 			System.out.println("doInBackground");
 			try {
-				new MusicServer();
+				File baseDirectory = Environment.getExternalStorageDirectory();
+				new MusicServer(baseDirectory);
+				
 			} catch (IOException ioe) {
 				System.err.println("Couldn't start server:\n" + ioe);
 				System.exit(-1);

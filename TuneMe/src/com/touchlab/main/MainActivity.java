@@ -1,7 +1,12 @@
-package com.touchlab.musicserver;
+package com.touchlab.main;
 
 import java.io.File;
 import java.io.IOException;
+
+import com.touchlab.musicserver.MusicServer;
+import com.touchlab.musicserver.R;
+import com.touchlab.musicserver.R.layout;
+import com.touchlab.musicserver.R.menu;
 
 import android.app.Activity;
 import android.os.AsyncTask;

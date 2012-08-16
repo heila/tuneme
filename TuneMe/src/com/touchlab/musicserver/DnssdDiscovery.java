@@ -37,6 +37,10 @@ public class DnssdDiscovery {
 		return instance;		
 	}
 	
+	private DnssdDiscovery() {
+		
+	}
+	
 	public void setNotificationCallback(DiscoveryChange callback) {
 		this.callback = new WeakReference<DiscoveryChange>(callback);
 	}

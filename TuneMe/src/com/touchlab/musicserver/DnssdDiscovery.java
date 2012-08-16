@@ -1,6 +1,7 @@
 package com.touchlab.musicserver;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -15,6 +16,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class DnssdDiscovery {
+	
+	public interface DiscoveryChange {
+		void discoveryChangeNotification();
+	}
+	WeakReference<DiscoveryChange> callback = null;
 
 	private android.net.wifi.WifiManager.MulticastLock lock;
 
@@ -31,6 +37,14 @@ public class DnssdDiscovery {
 		return instance;		
 	}
 	
+	private DnssdDiscovery() {
+		
+	}
+	
+	public void setNotificationCallback(DiscoveryChange callback) {
+		this.callback = new WeakReference<DiscoveryChange>(callback);
+	}
+	
 	public void setUp(Context context) {
 		services = new ConcurrentHashMap<String, ServiceInfo>();
 		android.net.wifi.WifiManager wifi = (android.net.wifi.WifiManager) context
@@ -43,11 +57,21 @@ public class DnssdDiscovery {
 			jmdns.addServiceListener(type, listener = new ServiceListener() {
 
 				public void serviceResolved(ServiceEvent ev) {
-					services.put(ev.getInfo().getQualifiedName(), ev.getInfo());
+ 					services.put(ev.getInfo().getQualifiedName(), ev.getInfo());
+ 					if (callback != null) {
+ 						if (callback.get() != null) {
+ 							callback.get().discoveryChangeNotification();
+ 						}
+ 					}
 				}
 
 				public void serviceRemoved(ServiceEvent ev) {
 					services.remove(ev.getInfo().getQualifiedName());
+					if (callback != null) {
+ 						if (callback.get() != null) {
+ 							callback.get().discoveryChangeNotification();
+ 						}
+ 					}
 				}
 
 				public void serviceAdded(ServiceEvent event) {
@@ -70,7 +94,6 @@ public class DnssdDiscovery {
 			jmdns.unregisterAllServices();
 			jmdns.registerService(serviceInfo);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

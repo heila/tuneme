@@ -114,19 +114,14 @@ public class MainActivity extends Activity implements DiscoveryChange {
 	public void discoveryChangeNotification() {
 		DnssdDiscovery ds = DnssdDiscovery.getInstance();
 		ArrayList<javax.jmdns.ServiceInfo> infos = ds.getServicesInfo();
-		// User i = (User) userListView.getSelectedItem(); // store currently
-		// selected
-		// item
+
 		User[] newUsers = new User[infos.size()];
 		for (int c = 0; c < infos.size(); c++) {
 			User u = new User(infos.get(c));
 			newUsers[c] = u;
 		}
 		((UserListAdapter) userListView.getAdapter()).setUsers(newUsers);
-		// if(newUsers.contains(i)){
-		// userListView.
-		// userListView.setSelection(position)
-		// }
+
 		runOnUiThread(new Runnable() {
 			public void run() {
 				((BaseAdapter) userListView.getAdapter())
@@ -145,14 +140,9 @@ public class MainActivity extends Activity implements DiscoveryChange {
 			sd.setUp(MainActivity.this);
 			sd.setNotificationCallback(MainActivity.this);
 
-			sd.publishUrl(username, "/prelude.mp3",
-					"Prelude");
+			sd.publishUrl(username, "/prelude.mp3", "Prelude");
 			return null;
 		}
 	}
-	
-	
-	
-	
 
 }

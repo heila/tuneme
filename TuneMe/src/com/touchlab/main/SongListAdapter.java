@@ -2,13 +2,17 @@ package com.touchlab.main;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.touchlab.musicserver.DnssdDiscovery;
@@ -47,14 +51,12 @@ public class SongListAdapter extends BaseAdapter {
 		TextView user = (TextView) rowView.findViewById(R.id.nameLabel);
 		TextView desc = (TextView) rowView.findViewById(R.id.descriptionLabel);
 		desc.setText(songs[position].getAlbum());
-		Button startButton = (Button) rowView.findViewById(R.id.startButton);
+		ImageButton startButton = (ImageButton) rowView
+				.findViewById(R.id.startButton);
 		startButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				DnssdDiscovery sd = DnssdDiscovery.getInstance();
-				sd.publishUrl(MainActivity.username,
-						"/" + songs[position].getLocalAccessUrl(),
-						"http://blah.blah/song");
+				(new Task()).execute(position);
 
 			}
 		});
@@ -73,5 +75,34 @@ public class SongListAdapter extends BaseAdapter {
 
 	public long getItemId(int position) {
 		return 0;
+	}
+
+	private class Task extends AsyncTask<Integer, Integer, Void> {
+
+		@Override
+		protected Void doInBackground(Integer... params) {
+			DnssdDiscovery sd = DnssdDiscovery.getInstance();
+			sd.publishUrl(MainActivity.username,
+					"/" + songs[params[0]].getLocalAccessUrl(),
+					"http://blah.blah/song");
+
+			((Activity) SongListAdapter.this.context)
+					.runOnUiThread(new Runnable() {
+						public void run() {
+							((BaseAdapter) SongListAdapter.this)
+									.notifyDataSetChanged();
+						}
+					});
+
+			String songURL = "http://localhost:8080/"
+					+ songs[params[0]].getLocalAccessUrl();
+
+			Intent i = new Intent("com.example.android.musicplayer.action.URL");
+			Uri uri = Uri.parse(songURL);
+			i.setData(uri);
+			context.startService(i);
+
+			return null;
+		}
 	}
 }

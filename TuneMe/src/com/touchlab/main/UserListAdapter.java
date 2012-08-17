@@ -3,6 +3,7 @@ package com.touchlab.main;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.touchlab.musicserver.DnssdDiscovery;
 import com.touchlab.musicserver.R;
 
 /**
@@ -45,22 +47,10 @@ public class UserListAdapter extends BaseAdapter {
 		startButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// Send an intent with the URL of the song to play. This is
-				// expected by
-				// MusicService.
 
 				String songURL = onlineUsers[position].url
 						+ onlineUsers[position].description;
 
-			//	Intent i = new Intent();
-			//Uri uri = Uri.parse(songURL);
-				//i.setAction(android.content.Intent.ACTION_VIEW);
-
-				// i.setDataAndType(uri, "audio/mp3");
-				// //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-				// | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-				//context.startService(i);
-				
 				
 				
 
@@ -88,4 +78,6 @@ public class UserListAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return 0;
 	}
+	
+	
 }

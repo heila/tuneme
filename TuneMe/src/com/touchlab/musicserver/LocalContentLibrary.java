@@ -35,5 +35,15 @@ public class LocalContentLibrary {
 		}
 		return list;		
 	}
+	
+	public LocalContentItem getLocalContent(String filename) {
+		int index = 0;
+		for (String[] data : metaData) {
+			if (filename.contains(data[4])) {
+				return new LocalContentItem(data[1],data[2],data[0],data[3],data[4],artworkIds[index++]);
+			}
+		}
+		return null;
+	}
 
 }

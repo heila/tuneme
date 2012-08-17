@@ -15,7 +15,9 @@ public class LibraryActivity extends Activity {
 		setContentView(R.layout.activity_library);
 
 		final ListView songListView = (ListView) findViewById(R.id.songlist);
-		songListView.setAdapter(new SongListAdapter(this));
+		if (songListView.getAdapter() == null) {
+			songListView.setAdapter(new SongListAdapter(this));
+		}
 		runOnUiThread(new Runnable() {
 			public void run() {
 				((BaseAdapter) songListView.getAdapter())

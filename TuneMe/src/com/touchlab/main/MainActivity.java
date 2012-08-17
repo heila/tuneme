@@ -20,7 +20,7 @@ import com.touchlab.musicserver.DnssdDiscovery.DiscoveryChange;
 import com.touchlab.musicserver.R;
 
 /**
- * 
+ * The main activity of the application
  * 
  *
  */
@@ -28,6 +28,7 @@ public class MainActivity extends Activity implements DiscoveryChange {
 
 	/** ListView of all online users */
 	ListView userListView;
+	
 	/**This device's username */
 	static String username;
 
@@ -36,12 +37,15 @@ public class MainActivity extends Activity implements DiscoveryChange {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		/** Registers this device using the DiscoverySerice*/
 		startDiscovery();
 
+		/**start the web server to service this device's music collection */
 		Intent i = new Intent(this, com.touchlab.musicserver.MusicService.class);
 		i.setAction(com.touchlab.musicserver.MusicService.ACTION_START);
 		startService(i);
 
+		
 		userListView = (ListView) findViewById(R.id.onlineUsers);
 		userListView.setAdapter(new UserListAdapter(this));
 

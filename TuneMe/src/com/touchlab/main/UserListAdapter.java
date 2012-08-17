@@ -115,7 +115,8 @@ public class UserListAdapter extends BaseAdapter {
 				artist = item.getArtist();
 				album = item.getAlbum();
 			}
-			String url = "http://152.111.8.115/tuneme/?" + URLEncoder.encode("artist="+artist+"&album="+album+"&host_name="+localName+"&listener_name="+listenerName+"&song=" + songName);
+
+			String url = "http://152.111.190.100/tuneme/tuneme/?" +"artist="+URLEncoder.encode(artist)+"&album="+URLEncoder.encode(album)+"&host_name="+URLEncoder.encode(localName)+"&listener_name="+URLEncoder.encode(listenerName)+"&song=" + songName;
 			InputStream retStream = null;
 			final HttpClient httpClient = new DefaultHttpClient();
 			final HttpUriRequest request = new HttpGet(url);

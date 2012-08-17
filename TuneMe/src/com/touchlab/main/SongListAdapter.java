@@ -53,7 +53,7 @@ public class SongListAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				DnssdDiscovery sd = DnssdDiscovery.getInstance();
 				sd.publishUrl(MainActivity.username,
-						"/" + songs[position].getSong(),
+						"/" + songs[position].getLocalAccessUrl(),
 						"http://blah.blah/song");
 
 			}

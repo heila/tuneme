@@ -17,7 +17,7 @@ public class LocalContentLibrary {
 	
 	int artworkIds[] = {R.drawable.antsmarching, R.drawable.fstopblues, R.drawable.prelude, R.drawable.suicideblond, R.drawable.theregoesthefear, R.drawable.whilewereyoung, R.drawable.wreckingball};
 	
-	String metaData[][] = { {"Ants Marching", "Dave Matthews Band", "Under The Table And Dreaming", "antsmarching.mp3", "antsmarching.mp3"},
+	public String metaData[][] = { {"Ants Marching", "Dave Matthews Band", "Under The Table And Dreaming", "antsmarching.mp3", "antsmarching.mp3"},
 			                 {"F Stop Blues", "Jack Johnson", "Bushfire Fairytales", "fstopblues.mp3", "fstopblues.mp3"},
 			                 {"Prelude", "Bonobo", "Black Sands","prelude.mp3", "prelude.mp3"},
 			                 {"Suice Blonde", "INXS", "Thre Greatest Hits", "suicideblond.mp3", "suicideblond.mp3"},

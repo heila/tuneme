@@ -9,6 +9,10 @@ public class LocalContentItem {
 	private String localAccessUrl;
 	private int artworkResourceId;
 	
+	public LocalContentItem(){
+		
+	}
+	
 	public LocalContentItem(String artist, String album, String song, String remoteAccessUrl, String localAccessUrl, int artworkResourceId) {
 		this.artist = artist;
 		this.album = album;
@@ -18,29 +22,55 @@ public class LocalContentItem {
 		this.artworkResourceId = artworkResourceId;
 	}
 
-	protected String getArtist() {
+	public String getArtist() {
 		return artist;
 	}
 
-	protected String getAlbum() {
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+
+	public String getAlbum() {
 		return album;
 	}
 
-	protected String getSong() {
+	public void setAlbum(String album) {
+		this.album = album;
+	}
+
+	public String getSong() {
 		return song;
 	}
 
-	protected String getRemoteAccessUrl() {
+	public void setSong(String song) {
+		this.song = song;
+	}
+
+	public String getRemoteAccessUrl() {
 		return remoteAccessUrl;
 	}
 
-	protected String getLocalAccessUrl() {
+	public void setRemoteAccessUrl(String remoteAccessUrl) {
+		this.remoteAccessUrl = remoteAccessUrl;
+	}
+
+	public String getLocalAccessUrl() {
 		return localAccessUrl;
 	}
-	
-	protected int getArtworkResourceId() {
-		return this.artworkResourceId;
+
+	public void setLocalAccessUrl(String localAccessUrl) {
+		this.localAccessUrl = localAccessUrl;
 	}
+
+	public int getArtworkResourceId() {
+		return artworkResourceId;
+	}
+
+	public void setArtworkResourceId(int artworkResourceId) {
+		this.artworkResourceId = artworkResourceId;
+	}
+
+	
 	
 	
 

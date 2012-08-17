@@ -57,6 +57,7 @@ public class SongListAdapter extends BaseAdapter {
 
 			public void onClick(View v) {
 				(new Task()).execute(position);
+				((Activity) context).finish();
 
 			}
 		});

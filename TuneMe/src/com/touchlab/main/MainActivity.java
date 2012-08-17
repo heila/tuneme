@@ -39,6 +39,8 @@ public class MainActivity extends Activity implements DiscoveryChange {
 		userListView.setAdapter(new UserListAdapter(this));
 
 	}
+	
+	
 
 	private void startDiscovery() {
 		final SharedPreferences settings = getSharedPreferences("AppPrefs",

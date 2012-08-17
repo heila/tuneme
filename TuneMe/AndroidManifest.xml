@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.touchlab.main.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,11 +37,13 @@
 
         <activity
             android:name=".Setting"
-            android:label="@string/title_activity_setting" >
+            android:label="@string/title_activity_setting"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LibraryActivity"
-            android:label="@string/title_activity_library" >
+            android:label="@string/title_activity_library"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

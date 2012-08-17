@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.touchlab.musicserver.R;
@@ -40,7 +41,7 @@ public class UserListAdapter extends BaseAdapter {
 		TextView user = (TextView) rowView.findViewById(R.id.nameLabel);
 		TextView desc = (TextView) rowView.findViewById(R.id.descriptionLabel);
 		desc.setText(onlineUsers[position].description);
-		Button startButton = (Button) rowView.findViewById(R.id.startButton);
+		ImageButton startButton = (ImageButton) rowView.findViewById(R.id.startButton);
 		startButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {

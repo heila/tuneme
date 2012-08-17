@@ -141,8 +141,8 @@ public class MainActivity extends Activity implements DiscoveryChange {
 			sd.setUp(MainActivity.this);
 			sd.setNotificationCallback(MainActivity.this);
 
-			sd.publishUrl(username, "/01%20-%20Mylo%20Xyloto.mp3",
-					"http://blah.blah/song");
+			sd.publishUrl(username, "/prelude.mp3",
+					"Prelude");
 			return null;
 		}
 	}

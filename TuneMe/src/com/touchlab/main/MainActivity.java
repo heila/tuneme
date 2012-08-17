@@ -19,9 +19,16 @@ import com.touchlab.musicserver.DnssdDiscovery;
 import com.touchlab.musicserver.DnssdDiscovery.DiscoveryChange;
 import com.touchlab.musicserver.R;
 
+/**
+ * 
+ * 
+ *
+ */
 public class MainActivity extends Activity implements DiscoveryChange {
 
+	/** ListView of all online users */
 	ListView userListView;
+	/**This device's username */
 	static String username;
 
 	@Override

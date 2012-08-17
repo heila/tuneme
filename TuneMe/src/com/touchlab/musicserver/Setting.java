@@ -3,7 +3,9 @@ package com.touchlab.musicserver;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class Setting extends Activity {
@@ -24,18 +26,20 @@ public class Setting extends Activity {
 		if (!name.equals("Name")) {
 			nameEdit.setText(name);
 		}
+		
+		Button save = (Button) findViewById(R.id.saveButton);
+		save.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				SharedPreferences.Editor ed = getSharedPreferences("AppPrefs",
+						MODE_PRIVATE).edit();
+				ed.putString("Name", nameEdit.getText().toString());
+				ed.commit();
+				finish();
+				
+			}
+		});
 	}
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			SharedPreferences settings = getSharedPreferences("AppPrefs",
-					MODE_PRIVATE);
-			SharedPreferences.Editor ed = settings.edit();
-			ed.putString("Name", nameEdit.getText().toString());
-			ed.commit();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	}
+	
 }

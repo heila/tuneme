@@ -1,5 +1,16 @@
 package com.touchlab.main;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -60,6 +71,8 @@ public class UserListAdapter extends BaseAdapter {
 				i.setData(uri);
 				context.startService(i);
 				
+				new WebTask(MainActivity.username,onlineUsers[position].username,onlineUsers[position].description).execute();
+				
 			}
 		});
 		user.setText(onlineUsers[position].username);
@@ -79,5 +92,44 @@ public class UserListAdapter extends BaseAdapter {
 		return 0;
 	}
 	
+	
+	private class WebTask extends AsyncTask<Integer, Integer, Void> {
+		String localName;
+		String listenerName;
+		String songName;
+		public WebTask(String localName, String listenerName, String songName) {
+			this.localName = localName;
+			this.listenerName = listenerName;
+			this.songName = songName;				
+		}
+
+		@Override
+		protected Void doInBackground(Integer... params) {
+			
+			String url = "http://152.111.8.115/tuneme/?artist=&album=&host_name="+localName+"&listener_name="+listenerName+"&song=" + songName;
+			InputStream retStream = null;
+			final HttpClient httpClient = new DefaultHttpClient();
+			final HttpUriRequest request = new HttpGet(url);
+			try {
+				final HttpResponse resp = httpClient.execute(request);
+				final int status = resp.getStatusLine().getStatusCode();
+				if (HttpStatus.SC_OK == status) {
+					retStream = resp.getEntity().getContent();
+				}
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+			if (retStream != null) {
+				try {
+					retStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			return null;
+		}
+	}
 	
 }

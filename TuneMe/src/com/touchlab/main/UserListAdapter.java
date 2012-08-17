@@ -2,6 +2,7 @@ package com.touchlab.main;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -25,6 +26,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.touchlab.musicserver.DnssdDiscovery;
+import com.touchlab.musicserver.LocalContentItem;
+import com.touchlab.musicserver.LocalContentLibrary;
 import com.touchlab.musicserver.R;
 
 /**
@@ -105,8 +108,14 @@ public class UserListAdapter extends BaseAdapter {
 
 		@Override
 		protected Void doInBackground(Integer... params) {
-			
-			String url = "http://152.111.8.115/tuneme/?artist=&album=&host_name="+localName+"&listener_name="+listenerName+"&song=" + songName;
+			String artist = "";
+			String album = "";
+			LocalContentItem item = LocalContentLibrary.getInstance().getLocalContent(this.songName);
+			if (item != null) {
+				artist = item.getArtist();
+				album = item.getAlbum();
+			}
+			String url = "http://152.111.8.115/tuneme/?" + URLEncoder.encode("artist="+artist+"&album="+album+"&host_name="+localName+"&listener_name="+listenerName+"&song=" + songName);
 			InputStream retStream = null;
 			final HttpClient httpClient = new DefaultHttpClient();
 			final HttpUriRequest request = new HttpGet(url);

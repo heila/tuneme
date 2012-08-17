@@ -22,7 +22,7 @@ import com.touchlab.musicserver.R;
 public class MainActivity extends Activity implements DiscoveryChange {
 
 	ListView userListView;
-	String username;
+	static String username;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -96,6 +96,10 @@ public class MainActivity extends Activity implements DiscoveryChange {
 			return true;
 		case R.id.menu_refresh:
 			discoveryChangeNotification();
+			return true;
+		case R.id.menu_library:
+			startActivity(new Intent(this,
+					com.touchlab.musicserver.LibraryActivity.class));
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

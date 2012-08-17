@@ -89,7 +89,7 @@ public class DnssdDiscovery {
 
 	public void publishUrl(String name, String description, String url) {
 		ServiceInfo serviceInfo = ServiceInfo.create("_tuneme._tcp.local.",
-				name, 8080, url + "," + description);
+				name, 8080, description);
 		try {
 			jmdns.unregisterAllServices();
 			jmdns.registerService(serviceInfo);

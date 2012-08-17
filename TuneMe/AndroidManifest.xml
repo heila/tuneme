@@ -23,17 +23,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:exported="false" android:name=".MusicService">
+
+        <service
+            android:name=".MusicService"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.example.android.musicservice.action.START" />
                 <action android:name="com.example.android.musicservice.action.STOP" />
             </intent-filter>
         </service>
-        
-        
+
+        <activity
+            android:name="com.touchlab.main.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name=".Setting"
+            android:label="@string/title_activity_setting" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
-    
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
 </manifest>
